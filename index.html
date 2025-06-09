@@ -1,54 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ricardo Black - Resume</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
-      <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
-      <div class="contact-info">
-        <p>📍 Your Address</p>
-        <p>📧 your.email@example.com</p>
-        <p>📞 +1234567890</p>
+      <div class="profile-pic">
+        <img src="https://i.imgur.com/wvxPV9S.png" alt="Avatar" />
       </div>
+      <h2>Ricardo Black</h2>
+      <p class="title">Creative Director</p>
       <div class="social-icons">
-        <a href="#">🔗 LinkedIn</a><br>
-        <a href="#">🐱 GitHub</a>
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-dribbble"></i>
+        <i class="fab fa-instagram"></i>
       </div>
+      <div class="contact-info">
+        <p><strong>Email:</strong> ricardo@example.com</p>
+        <p><strong>Phone:</strong> +1 (070) 123-4567</p>
+        <p><strong>WhatsApp:</strong> 555 000 555</p>
+        <p><strong>Location:</strong> San Francisco, USA</p>
+      </div>
+      <button class="download-btn">⬇ Download CV</button>
     </aside>
 
-    <main class="main-content">
-      <nav class="nav-buttons">
-        <button onclick="showSection('about')">About Me</button>
-        <button onclick="showSection('resume')">Resume</button>
-        <button onclick="showSection('contact')">Contact Me</button>
-      </nav>
-
-      <section id="about" class="content-section active">
-        <h2>About Me</h2>
-        <p>Write about yourself here...</p>
+    <main class="content">
+      <section class="about">
+        <h1>About Me</h1>
+        <p>
+          I'm Creative Director and UI/UX Designer from Sydney, Australia,
+          working in web development and print media. I enjoy turning complex
+          problems into simple, beautiful and intuitive designs.
+        </p>
+        <p>
+          My job is to build your website so that it is functional and user-friendly
+          but at the same time attractive. Moreover, I add personal touch to your
+          product and make sure that it is eye-catching and easy to use.
+        </p>
       </section>
 
-      <section id="resume" class="content-section">
-        <h2>Resume</h2>
-        <p>Experience, education, etc.</p>
-      </section>
-
-      <section id="contact" class="content-section">
-        <h2>Contact Me</h2>
-        <form>
-          <input type="text" placeholder="Your Name" required><br>
-          <input type="email" placeholder="Your Email" required><br>
-          <textarea placeholder="Your Message"></textarea><br>
-          <button type="submit">Send</button>
-        </form>
+      <section class="what-i-do">
+        <h2>What I'm Doing</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Web Design</h3>
+            <p>The most modern and high-quality design made at a professional level.</p>
+          </div>
+          <div class="card">
+            <h3>Web Development</h3>
+            <p>High-quality development of sites at the professional level.</p>
+          </div>
+          <div class="card">
+            <h3>Mobile Apps</h3>
+            <p>Professional development of applications for iOS and Android.</p>
+          </div>
+          <div class="card">
+            <h3>Photography</h3>
+            <p>High-quality photos of any category at a professional level.</p>
+          </div>
+        </div>
       </section>
     </main>
   </div>
 
-  <script src="script.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
