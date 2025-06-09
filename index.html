@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+      <div class="contact-info">
+        <p>📍 Your Address</p>
+        <p>📧 your.email@example.com</p>
+        <p>📞 +1234567890</p>
+      </div>
+      <div class="social-icons">
+        <a href="#">🔗 LinkedIn</a><br>
+        <a href="#">🐱 GitHub</a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <nav class="nav-buttons">
+        <button onclick="showSection('about')">About Me</button>
+        <button onclick="showSection('resume')">Resume</button>
+        <button onclick="showSection('contact')">Contact Me</button>
+      </nav>
+
+      <section id="about" class="content-section active">
+        <h2>About Me</h2>
+        <p>Write about yourself here...</p>
+      </section>
+
+      <section id="resume" class="content-section">
+        <h2>Resume</h2>
+        <p>Experience, education, etc.</p>
+      </section>
+
+      <section id="contact" class="content-section">
+        <h2>Contact Me</h2>
+        <form>
+          <input type="text" placeholder="Your Name" required><br>
+          <input type="email" placeholder="Your Email" required><br>
+          <textarea placeholder="Your Message"></textarea><br>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
