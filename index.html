@@ -3,120 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rupesh Prajapati - Web Developer Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Rupesh Prajapati | Web Developer</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Load Robotic/Gaming/Code Font: Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
-    <header id="hero">
-        <div class="hero-content">
-            <img src="IMG_2680.jpeg" alt="Rupesh Prajapati" class="profile-img">
-            <h1>Rupesh Prajapati</h1>
-            <p class="job-title">Intermediate/Fresher Web Developer</p>
-            <p class="summary">Web Developer with hands-on experience in customizing WordPress and Shopify themes, integrating plugins and apps, and maintaining website functionality. Focused on delivering responsive, secure, and user-friendly websites. [cite: 29, 31]</p>
+    <!-- NAV BAR - Initially Hidden, shown after preloader -->
+    <nav class="navbar fixed top-0 w-full opacity-0 pointer-events-none transition-opacity duration-500">
+        <div class="section-inner flex justify-between items-center py-4 px-4 sm:px-8 max-w-7xl mx-auto">
             
-            <div class="contact-links">
-                <a href="mailto:prajapatirupesh69@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+61410050204" title="Phone"><i class="fas fa-phone"></i></a>
-                <a href="#skills" class="btn">View Skills</a>
+            <!-- Logo link to home -->
+            <a href="#home" class="logo text-xl font-bold cursor-pointer scroll-link flex items-center">
+                <!-- SVG Logo: Stylized R inside a closing tag (R />) -->
+                <svg class="logo-svg" width="45" height="45" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Path for the closing tag base (forward slash and greater than sign) -->
+                    <path d="M 20 15 L 30 25 L 20 35" class="logo-path" stroke-linejoin="round" />
+                    
+                    <!-- Bold R text centered at the origin of the slash -->
+                    <text x="16" y="32" text-anchor="end" font-size="24" class="logo-text">R</text>
+                </svg>
+                <!-- Optional: Keep the name text slightly smaller next to the icon -->
+                <span class="ml-2 text-white text-lg sm:text-xl font-bold neon-text-shadow-white hidden sm:block">RUPESH</span>
+            </a>
+            
+            <!-- Desktop Menu (Hidden on mobile) -->
+            <div class="menu space-x-4 lg:space-x-6">
+                <a href="#home" class="nav-link scroll-link">Home</a>
+                <a href="#about" class="nav-link scroll-link">About Me</a>
+                <a href="#experience" class="nav-link scroll-link">Experience</a>
+                <a href="#skills" class="nav-link scroll-link">Skills</a>
+                <a href="#education" class="nav-link scroll-link">Education</a>
+                <a href="#contact" class="nav-link scroll-link">Contact</a>
             </div>
-            <button id="theme-toggle" title="Toggle Light/Dark Mode"><i class="fas fa-sun"></i></button>
-        </div>
-    </header>
 
-    <nav id="navbar">
-        <a href="#hero">Home</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
+            <!-- Mobile Menu Toggle Button (Visible on mobile/tablet) -->
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle p-2 text-neon-color focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu Overlay for when active -->
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+            <a href="#home" class="nav-link scroll-link">Home</a>
+            <a href="#about" class="nav-link scroll-link">About Me</a>
+            <a href="#experience" class="nav-link scroll-link">Experience</a>
+            <a href="#skills" class="nav-link scroll-link">Skills</a>
+            <a href="#education" class="nav-link scroll-link">Education</a>
+            <a href="#contact" class="nav-link scroll-link">Contact</a>
+        </div>
     </nav>
 
-    <section id="skills" class="container">
-        <h2>🛠️ Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Web Development Tools & Technologies</h3>
-                <ul>
-                    <li>**Core:** HTML5, CSS3, JavaScript </li>
-                    <li>**Backend/CMS:** PHP (for WordPress), Liquid (for Shopify) [cite: 19]</li>
-                    <li>**Theme/Platform:** WordPress Theme & Plugin Customization, Shopify Theme Editing & App Integration [cite: 20, 22]</li>
+    <!-- 1. HOME SECTION (Split into Preloader and Main Content) -->
+    <section id="home" class="section-container">
+        
+        <!-- Preloader (Initial State) -->
+        <div id="preloader-container" class="w-full max-w-lg mx-auto text-center px-4">
+            <h1 id="preloader-text" class="text-4xl md:text-6xl font-extrabold mb-4">INITIALIZING...</h1>
+            <div id="loading-bar">
+                <div id="loading-progress"></div>
+            </div>
+        </div>
+        
+        <!-- Main Home Content (Hidden initially) -->
+        <div id="home-box" class="p-6 md:p-12 text-center rounded-xl bg-gray-900 mx-auto w-full max-w-4xl transition-all duration-700 opacity-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <h1 id="home-title" class="text-4xl md:text-6xl font-extrabold mb-6 md:mb-8 text-white neon-text-shadow-white">
+                Welcome..
+            </h1>
+            <!-- Adjusted font size for mobile text consistency -->
+            <div id="home-content" class="text-base md:text-xl font-mono text-gray-400 opacity-0 transition-opacity duration-1000 delay-1000">
+                
+                <!-- 1. Typing Text (Green Neon) -->
+                <p class="text-left mb-3 text-white">
+                    <span class="text-neon-color mr-2">*</span>
+                    <span id="typing-text" class="neon-text-shadow font-mono"></span>
+                </p>
+
+                <!-- 2. Static Text (White Neon Shadow) - Profile Summary Snippet -->
+                <p class="text-left mb-3 text-white neon-text-shadow-white">
+                    <span class="text-neon-color mr-2">*</span>
+                    Web Developer with expertise in WordPress, Shopify, and front-end troubleshooting.
+                </p>
+
+                <!-- 3. Static Text (White Neon Shadow) -->
+                <p class="text-left mb-3 text-white neon-text-shadow-white">
+                    <span class="text-neon-color mr-2">*</span>
+                    Delivering responsive, secure, and user-friendly websites.
+                </p>
+
+                <!-- 4. Static Text with Blinking Cursor (White Neon Shadow) -->
+                <p class="text-left text-white neon-text-shadow-white">
+                    <span class="text-neon-color mr-2">*</span>
+                    System ready. Type 'help' for commands<span id="static-cursor" class="static-cursor"></span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HR Divider after Home -->
+    <hr class="neon-divider" />
+
+    <!-- 2. ABOUT ME SECTION -->
+    <section id="about" class="section-container bg-gray-900 border-t border-b border-gray-800 opacity-0 pointer-events-none transition-opacity duration-500">
+        <h2 class="text-4xl font-bold mb-8 text-center neon-text-shadow">About Me</h2>
+        
+        <!-- Stacked on mobile, side-by-side on md+ -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            
+            <!-- Left: Image (Centered on mobile) -->
+            <div class="flex justify-center md:justify-start mb-6 md:mb-0 order-1 md:order-none">
+                <!-- Using the uploaded image asset -->
+                <img src="/api/files/IMG_2680.jpeg-982450dc-6da8-4e39-b44b-d99c3c908a39" 
+                     alt="Rupesh Prajapati Profile Photo" 
+                     class="bw-img">
+            </div>
+
+            <!-- Right: Text & Skills (Order changed to appear above image on mobile) -->
+            <div class="order-2 md:order-none">
+                <h3 class="text-2xl sm:text-3xl font-bold mb-2 text-white neon-text-shadow-white">Rupesh Prajapati</h3>
+                <h4 class="text-lg sm:text-xl mb-4 text-gray-400">Web Developer | Adelaide, SA</h4>
+                <p class="text-gray-300 leading-relaxed mb-6 border-l-4 border-neon-color pl-4 py-1 text-sm sm:text-base">
+                    Web Developer with hands-on experience in customizing WordPress and Shopify themes, integrating plugins and apps, 
+                    and maintaining website functionality. Skilled in front-end troubleshooting, content management, 
+                    and collaborating with cross-functional teams. Focused on delivering responsive, secure, and user-friendly 
+                    websites aligned with client goals and brand standards.
+                </p>
+
+                <h5 class="text-xl sm:text-2xl font-semibold mb-3 text-white neon-text-shadow-white">Technical Toolkit</h5>
+                <!-- Skills should wrap nicely -->
+                <div class="flex flex-wrap gap-2 sm:gap-3">
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">HTML5/CSS3</div>
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">JavaScript</div>
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">PHP (WordPress)</div>
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">Liquid (Shopify)</div>
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">Elementor/WPBakery</div>
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">Responsive Design</div>
+                </div>
+
+                <h5 class="text-xl sm:text-2xl font-semibold mt-6 mb-3 text-white neon-text-shadow-white">Soft Skills</h5>
+                <div class="flex flex-wrap gap-2 sm:gap-3">
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">Attention to Detail</div>
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">Collaboration</div>
+                    <div class="skill-tab p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-mono cursor-pointer">Time Management</div>
+                </div>
+                
+                <!-- Button for Hack Resume -->
+                <a href="/api/files/RupeshPrajapati (1).pdf" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   download="Rupesh_Prajapati_Resume.pdf"
+                   class="resume-btn rounded-full hover:shadow-lg hover:text-white mt-8">
+                    <i class="fas fa-terminal mr-3 text-lg"></i>
+                    Hack Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HR Divider after About Me -->
+    <hr class="neon-divider opacity-0 pointer-events-none transition-opacity duration-500" />
+
+    <!-- 3. EXPERIENCE SECTION -->
+    <section id="experience" class="section-container opacity-0 pointer-events-none transition-opacity duration-500">
+        <h2 class="text-4xl font-bold mb-8 text-center neon-text-shadow">Work Experience</h2>
+
+        <div class="space-y-10">
+            <!-- Experience 1: Nova Solution -->
+            <!-- Adjusted padding and font sizes for mobile -->
+            <div class="relative pl-6 sm:pl-10 pb-8 before:absolute before:top-0 before:left-3 before:h-full before:w-1 before:bg-gray-700 before:rounded-full">
+                <div class="absolute left-0 top-0 w-5 h-5 sm:w-8 sm:h-8 bg-black rounded-full border-2 border-neon-color flex items-center justify-center">
+                    <i class="fas fa-briefcase text-xs text-neon-color"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-white ml-6 sm:ml-8 neon-text-shadow-white">Web Developer - Nova Solution</h3>
+                <p class="text-neon-color italic mb-3 ml-6 sm:ml-8 text-sm">AUG 2022 TO MARCH 2023</p>
+                <ul class="list-disc list-inside space-y-3 text-gray-300 ml-6 sm:ml-8 text-sm">
+                    <li>
+                        <strong class="text-white">Customized Themes and Templates:</strong> Adapted and customized WordPress and Shopify themes using 
+                        <span class="text-neon-color">HTML, CSS, PHP, and Liquid</span> to meet specific branding and design requirements.
+                    </li>
+                    <li>
+                        <strong class="text-white">Integrated Plugins and Apps:</strong> Installed and configured essential plugins (WordPress) and apps (Shopify), 
+                        including SEO tools, payment gateways, and analytics tools to enhance website functionality.
+                    </li>
+                    <li>
+                        <strong class="text-white">Managed Site Content:</strong> Uploaded and formatted content such as blog posts, product listings, and media assets, 
+                        maintaining brand consistency and responsive design standards.
+                    </li>
+                    <li>
+                        <strong class="text-white">Troubleshot and Fixed Front-End Issues:</strong> Identified and resolved minor bugs and design inconsistencies, 
+                        improving user experience and supporting cross-browser compatibility.
+                    </li>
+                    <li>
+                        <strong class="text-white">Collaborated Across Teams:</strong> Worked closely with designers, senior developers, and project managers; 
+                        documented development tasks, updates, and technical processes for project transparency.
+                    </li>
                 </ul>
             </div>
-            <div class="skill-category">
-                <h3>Design & Optimization</h3>
-                <ul>
-                    <li>Responsive Web Design [cite: 23]</li>
-                    <li>Page Builders: Elementor, WPBakery [cite: 24]</li>
-                    <li>Cross-Browser Compatibility & Mobile Optimization [cite: 25]</li>
-                    <li>Website Maintenance & Troubleshooting [cite: 26, 27]</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>Soft Skills</h3>
-                <ul>
-                    <li>Strong Attention to Detail [cite: 50]</li>
-                    <li>Team Collaboration [cite: 52]</li>
-                    <li>Quick Learner & Adaptable [cite: 54, 55]</li>
+
+            <!-- Experience 2: 3lwebexperts -->
+            <div class="relative pl-6 sm:pl-10 pb-8 before:absolute before:top-0 before:left-3 before:h-full before:w-1 before:bg-gray-700 before:rounded-full">
+                <div class="absolute left-0 top-0 w-5 h-5 sm:w-8 sm:h-8 bg-black rounded-full border-2 border-neon-color flex items-center justify-center">
+                    <i class="fas fa-briefcase text-xs text-neon-color"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-white ml-6 sm:ml-8 neon-text-shadow-white">Web Developer - 3lwebexperts</h3>
+                <p class="text-neon-color italic mb-3 ml-6 sm:ml-8 text-sm">2016 TO 2017</p>
+                <ul class="list-disc list-inside space-y-3 text-gray-300 ml-6 sm:ml-8 text-sm">
+                    <li>
+                        Developed and customized WordPress websites for small to mid-sized clients, using custom themes and existing templates.
+                    </li>
+                    <li>
+                        Integrated and configured essential plugins for SEO, contact forms, sliders, and eCommerce functionality.
+                    </li>
+                    <li>
+                        Managed website content updates, ensuring layout consistency, responsive design, and optimized page performance.
+                    </li>
+                    <li>
+                        Collaborated with designers and project managers to translate client requirements into functional web solutions.
+                    </li>
+                    <li>
+                        Troubleshot front-end issues related to layout, browser compatibility, and user experience.
+                    </li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <hr>
+    <!-- HR Divider after Experience -->
+    <hr class="neon-divider opacity-0 pointer-events-none transition-opacity duration-500" />
 
-    <section id="experience" class="container">
-        <h2>💼 Work Experience</h2>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3>Web Developer - Nova Solution</h3>
-                <span class="job-dates">AUG 2022 TO MARCH 2023 [cite: 36]</span>
+    <!-- 4. SKILLS SECTION -->
+    <section id="skills" class="section-container bg-gray-900 border-t border-b border-gray-800 opacity-0 pointer-events-none transition-opacity duration-500">
+        <h2 class="text-4xl font-bold mb-8 text-center neon-text-shadow">Technical Skills Matrix</h2>
+        <!-- Changed grid to col-1 on mobile, col-2 on sm+, col-3 on lg+ -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            
+            <!-- Category 1: Core Technologies -->
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-xl border border-gray-700 hover:neon-box-shadow transition-shadow duration-300">
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-neon-color flex items-center"><i class="fas fa-laptop-code mr-3"></i> Core Web Development</h3>
+                <ul class="list-none space-y-2 text-gray-300 text-xs sm:text-sm">
+                    <li>HTML5, CSS3, JavaScript</li>
+                    <li>PHP (for WordPress Customization)</li>
+                    <li>Liquid (for Shopify Theme Editing)</li>
+                    <li>Responsive Web Design</li>
+                    <li>Cross-Browser Compatibility</li>
+                </ul>
             </div>
-            <ul>
-                <li>Customized WordPress and Shopify themes using **HTML, CSS, PHP, and Liquid** to meet branding requirements. [cite: 37, 38]</li>
-                <li>Installed and configured essential plugins (SEO tools, payment gateways) and apps (Shopify) to **enhance website functionality**. [cite: 40, 41]</li>
-                <li>Conducted routine updates to CMS core, themes, and third-party tools, ensuring site security, performance, and compatibility. [cite: 43]</li>
-                <li>Identified and resolved minor bugs and design inconsistencies, improving user experience and supporting **cross-browser compatibility**. [cite: 46]</li>
-            </ul>
-        </div>
-
-        <div class="job-card">
-            <div class="job-header">
-                <h3>Web Developer - 3lwebexperts</h3>
-                <span class="job-dates">2016 TO 2017 [cite: 62]</span>
+            
+            <!-- Category 2: CMS & Platforms -->
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-xl border border-gray-700 hover:neon-box-shadow transition-shadow duration-300">
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-neon-color flex items-center"><i class="fas fa-cube mr-3"></i> CMS & eCommerce Platforms</h3>
+                <ul class="list-none space-y-2 text-gray-300 text-xs sm:text-sm">
+                    <li>WordPress Theme & Plugin Customization</li>
+                    <li>Shopify Theme Editing & App Integration</li>
+                    <li>Page Builders (Elementor, WPBakery)</li>
+                    <li>Website Maintenance & Troubleshooting</li>
+                </ul>
             </div>
-            <ul>
-                <li>Developed and customized WordPress websites for clients, using custom themes and existing templates. [cite: 63]</li>
-                <li>Integrated and configured essential plugins for SEO, contact forms, sliders, and eCommerce functionality. [cite: 64]</li>
-                <li>Managed website content updates, ensuring layout consistency, responsive design, and optimized page performance. [cite: 65]</li>
-            </ul>
+            
+            <!-- Category 3: Utility & Process (Only appears in third column on large screens) -->
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-xl border border-gray-700 hover:neon-box-shadow transition-shadow duration-300 col-span-1 sm:col-span-2 lg:col-span-1">
+                <h3 class="text-lg sm:text-xl font-bold mb-3 text-neon-color flex items-center"><i class="fas fa-cogs mr-3"></i> Utility & Process Skills</h3>
+                <ul class="list-none space-y-2 text-gray-300 text-xs sm:text-sm">
+                    <li>Front-End Debugging</li>
+                    <li>Content Management</li>
+                    <li>Basic Security Enhancements</li>
+                    <li>Performance Optimization (Page Speed)</li>
+                </ul>
+            </div>
+
         </div>
     </section>
 
-    <hr>
+    <!-- HR Divider after Skills -->
+    <hr class="neon-divider opacity-0 pointer-events-none transition-opacity duration-500" />
 
-    <section id="education" class="container">
-        <h2>🎓 Education</h2>
-        <div class="education-item">
-            <p class="degree">Master of Information Technology</p>
-            <p class="institution">FLINDERS UNIVERSITY, Adelaide South Australia</p>
-            <span class="edu-year">2019-2021 [cite: 7, 8, 9, 10]</span>
-        </div>
-        <div class="education-item">
-            <p class="degree">Bachelor in Computer Application</p>
-            <p class="institution">H.N.G.U UNIVERSITY, Gujarat India</p>
-            <span class="edu-year">2013-2015 [cite: 11, 12, 13, 14]</span>
+    <!-- 5. EDUCATION SECTION -->
+    <section id="education" class="section-container opacity-0 pointer-events-none transition-opacity duration-500">
+        <h2 class="text-4xl font-bold mb-8 text-center neon-text-shadow">Education</h2>
+        <div class="space-y-6 sm:space-y-10 max-w-3xl mx-auto">
+            
+            <div class="bg-gray-900 p-5 sm:p-6 rounded-xl border-l-4 border-neon-color shadow-lg transition-shadow duration-300 hover:neon-box-shadow">
+                <h3 class="text-xl sm:text-2xl font-bold text-white neon-text-shadow-white">Master of Information Technology</h3>
+                <p class="text-base sm:text-lg text-gray-400 mb-1">FLINDERS UNIVERSITY, Adelaide South Australia</p>
+                <p class="text-neon-color font-semibold text-sm sm:text-base">2019 - 2021</p>
+            </div>
+
+            <div class="bg-gray-900 p-5 sm:p-6 rounded-xl border-l-4 border-neon-color shadow-lg transition-shadow duration-300 hover:neon-box-shadow">
+                <h3 class="text-xl sm:text-2xl font-bold text-white neon-text-shadow-white">Bachelor in Computer Application</h3>
+                <p class="text-base sm:text-lg text-gray-400 mb-1">H.N.G.U UNIVERSITY, Gujarat India</p>
+                <p class="text-neon-color font-semibold text-sm sm:text-base">2013 - 2015</p>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Rupesh Prajapati. Built with HTML, CSS, and JavaScript.</p>
-        <p>Location: Blair Athol, 5084 SA [cite: 5]</p>
-        <button id="scroll-to-top" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+    <!-- HR Divider after Education -->
+    <hr class="neon-divider opacity-0 pointer-events-none transition-opacity duration-500" />
+
+    <!-- 6. CONTACT ME SECTION -->
+    <section id="contact" class="section-container bg-gray-900 border-t border-b border-gray-800 opacity-0 pointer-events-none transition-opacity duration-500">
+        <h2 class="text-4xl font-bold mb-8 text-center neon-text-shadow">Connect & Locate</h2>
+        
+        <!-- Stacks vertically on mobile (col-1) and uses 3 columns on tablet/desktop (sm:col-3) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+            
+            <!-- Email Button -->
+            <a href="mailto:prajapatirupesh69@gmail.com" class="contact-btn rounded-xl" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-envelope text-2xl sm:text-3xl mb-2"></i>
+                <p class="font-semibold text-base sm:text-lg">Email</p>
+                <span class="text-xs sm:text-sm text-gray-400 mt-1">Send a Message</span>
+            </a>
+
+            <!-- Phone Button -->
+            <a href="tel:+61410050204" class="contact-btn rounded-xl">
+                <i class="fas fa-phone text-2xl sm:text-3xl mb-2"></i>
+                <p class="font-semibold text-base sm:text-lg">Phone</p>
+                <span class="text-xs sm:text-sm text-gray-400 mt-1">Call Me</span>
+            </a>
+
+            <!-- Location Button -->
+            <a href="https://maps.google.com/?q=Blair+Athol,+SA,+Australia" class="contact-btn rounded-xl" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-map-marker-alt text-2xl sm:text-3xl mb-2"></i>
+                <p class="font-semibold text-base sm:text-lg">Location</p>
+                <span class="text-xs sm:text-sm text-gray-400 mt-1">View on Map</span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- HR Divider after Education -->
+    <hr class="neon-divider opacity-0 pointer-events-none transition-opacity duration-500" />
+
+    <!-- FOOTER -->
+    <footer class="text-center py-4 text-gray-500 border-t border-gray-800 opacity-0 pointer-events-none transition-opacity duration-500 text-sm">
+        <p>&copy; 2025 Rupesh Prajapati. Built with Neon & Code.</p>
     </footer>
 
+    <!-- Link to external JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>
-
