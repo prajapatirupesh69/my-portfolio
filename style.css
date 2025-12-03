@@ -1,597 +1,339 @@
-/* --- Global Styles & Reset --- */
+/* --- Global CSS Variables (Green Neon Theme) --- */
 :root {
-    --light-bg: #f4f4f9;
-    --light-text: #333;
-    --light-accent: #007bff;
-    --light-secondary: #fff;
-
-    --dark-bg: #1e1e2f;
-    --dark-text: #f4f4f9;
-    --dark-accent: #6aa8fc;
-    --dark-secondary: #2c2c40;
-
-    --main-bg: var(--light-bg);
-    --main-text: var(--light-text);
-    --accent-color: var(--light-accent);
-    --card-bg: var(--light-secondary);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --bg-color: #111111;        /* Light Black / Dark Gray */
+    --text-color: #FAFAFA;     /* Primary Text Color (White) */
+    --neon-color: #00ff88;     /* Bright Green/Matrix Neon */
+    
+    /* UPDATED: Reduced intensity shadows */
+    --neon-shadow-light: 0 0 2px var(--neon-color), 0 0 3px var(--neon-color);
+    --neon-shadow-medium: 0 0 3px var(--neon-color), 0 0 6px var(--neon-color);
+    --neon-shadow-strong: 0 0 4px var(--neon-color), 0 0 8px var(--neon-color), 0 0 12px var(--neon-color);
+    
+    --card-bg: #1e1e1e;
+    --navbar-height: 72px; /* Define the navbar height for easy reference */
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background-color: var(--main-bg);
-    color: var(--main-text);
-    transition: background-color 0.3s, color 0.3s;
+    /* CHANGED FONT: Using Orbitron for a futuristic, display feel */
+    font-family: 'Orbitron', sans-serif; 
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
-.container {
-    width: 90%;
-    max-width: 1100px;
+/* Adjust font size for better readability with the Orbitron font */
+.section-container {
+    font-size: 1rem; /* Base size */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 0;
+    /* Adjusted padding for better mobile spacing */
+    padding: 40px 16px; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.2em;
-    color: var(--accent-color);
+/* Specific height adjustment for Home section to ensure it always fills the viewport */
+#home.section-container {
+    min-height: 100vh; /* Use full viewport height */
+    padding-top: 0; /* Ensures the section starts at the top of the viewport */
 }
 
-hr {
+/* Apply larger padding for desktop/tablet */
+@media (min-width: 768px) {
+    .section-container {
+        padding: 80px 20px; 
+    }
+}
+
+/* Font size adjustments for Orbitron and responsiveness */
+.text-4xl { font-size: 2.5rem; }
+.text-6xl { font-size: 4rem; }
+.text-3xl { font-size: 2rem; }
+.text-xl { font-size: 1.25rem; }
+.text-lg { font-size: 1.125rem; }
+.text-sm { font-size: 0.875rem; }
+
+/* Responsive Overrides (For better scaling of large fonts) */
+@media (max-width: 767px) {
+    .text-4xl { font-size: 2rem; } /* Section titles */
+    .md\:text-6xl { font-size: 3rem; } /* Home title */
+    .md\:text-4xl { font-size: 2.5rem; } /* Home title on smaller devices */
+    .md\:text-xl { font-size: 1.125rem; } /* Home content */
+}
+
+/* Use a standard monospace font for code-like sections for clarity */
+.font-mono {
+     font-family: 'monospace';
+}
+
+
+/* --- Global Neon Styles --- */
+.neon-text-shadow {
+    /* Neon Green Text */
+    color: var(--neon-color); 
+    text-shadow: var(--neon-shadow-light);
+}
+.neon-text-shadow-white {
+    /* White Text with Neon Shadow (Green) */
+    color: var(--text-color); 
+    text-shadow: var(--neon-shadow-light);
+}
+
+.neon-box-shadow {
+    box-shadow: var(--neon-shadow-medium);
+}
+
+/* --- Horizontal Rule (HR) Styling --- */
+.neon-divider {
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--accent-color), rgba(0, 0, 0, 0));
-    margin: 20px auto;
-    width: 80%;
+    background: var(--neon-color);
+    box-shadow: var(--neon-shadow-light);
+    margin: 0 auto;
+    width: 90%; 
+    max-width: 1200px;
 }
 
 
-/* --- Header & Hero Section --- */
-#hero {
-    background: linear-gradient(135deg, var(--accent-color), #004c99);
-    color: white;
-    padding: 80px 20px;
-    text-align: center;
-    position: relative; /* For theme toggle button */
-}
-
-.profile-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 5px solid white;
-    object-fit: cover;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease-in-out;
-}
-
-.profile-img:hover {
-    transform: scale(1.05); /* JS Animation effect */
-}
-
-#hero h1 {
-    font-size: 3em;
-    margin-bottom: 5px;
-}
-
-.job-title {
-    font-size: 1.2em;
-    font-style: italic;
-    margin-bottom: 20px;
-}
-
-.summary {
-    max-width: 600px;
-    margin: 0 auto 30px;
-    font-size: 1.1em;
-}
-
-.contact-links a {
-    color: white;
-    font-size: 1.5em;
-    margin: 0 10px;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.contact-links a:hover {
-    color: #ffd700; /* Gold hover color */
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: white;
-    color: var(--accent-color);
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    margin-left: 20px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn:hover {
-    background-color: #eee;
-    color: #0056b3;
-}
-
-
-/* --- Navigation Bar --- */
-#navbar {
-    position: sticky;
-    top: 0;
+/* --- Navbar Styling --- */
+.navbar {
+    height: var(--navbar-height); /* Explicit height for JS calculation */
+    background-color: rgba(17, 17, 17, 0.95); /* Semi-transparent dark bg */
+    border-bottom: 1px solid var(--neon-color);
+    box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3); /* Updated shadow color */
     z-index: 1000;
-    background-color: var(--card-bg);
-    border-bottom: 1px solid #ccc;
+}
+
+/* Responsive Nav Menu (Hide on small screens, show menu icon) */
+.menu {
+    display: none;
+}
+@media (min-width: 1024px) {
+    .menu {
+        display: flex;
+    }
+}
+
+/* Added mobile menu icon */
+.mobile-menu-toggle {
+    display: block;
+}
+@media (min-width: 1024px) {
+    .mobile-menu-toggle {
+        display: none;
+    }
+}
+
+/* Mobile Menu Overlay for when active */
+.mobile-menu-overlay {
+    position: fixed;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(17, 17, 17, 0.98);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    display: none; /* Controlled by JS */
+    overflow-y: auto;
+}
+.mobile-menu-overlay a {
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    width: 80%;
     text-align: center;
-    padding: 10px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: background-color 0.3s;
+    border-bottom: 1px solid rgba(0, 255, 136, 0.1);
 }
-
-#navbar a {
-    color: var(--main-text);
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#navbar a:hover {
-    background-color: var(--accent-color);
-    color: white;
-}
-
-
-/* --- Skills Section --- */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.skill-category {
-    background-color: var(--card-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.2s, background-color 0.3s;
-}
-
-.skill-category:hover {
-    transform: translateY(-5px);
-}
-
-.skill-category h3 {
-    color: var(--accent-color);
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 5px;
-}
-
-.skill-category ul {
-    list-style: none;
-}
-
-.skill-category li {
-    padding: 8px 0;
-    border-bottom: 1px dashed #ccc;
-}
-
-.skill-category li:last-child {
+.mobile-menu-overlay a:last-child {
     border-bottom: none;
 }
 
 
-/* --- Experience Section --- */
-.job-card {
-    background-color: var(--card-bg);
-    padding: 20px;
-    margin-bottom: 25px;
-    border-left: 5px solid var(--accent-color);
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: background-color 0.3s;
+.nav-link {
+    color: var(--text-color);
+    padding: 8px 15px;
+    text-shadow: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+.nav-link:hover {
+    color: var(--neon-color);
+    text-shadow: var(--neon-shadow-light);
 }
 
-.job-header {
-    display: flex;
-    justify-content: space-between;
+/* Logo specific styling */
+.logo-svg {
+    color: var(--neon-color);
+    filter: drop-shadow(0 0 2px var(--neon-color));
+    transition: filter 0.3s ease;
+}
+.logo-svg:hover {
+    filter: drop-shadow(0 0 6px var(--neon-color)) drop-shadow(0 0 8px var(--neon-color));
+}
+
+/* SVG specific styles to use the Orbitron font and neon color */
+.logo-text { 
+    font-family: 'Orbitron', sans-serif; 
+    font-weight: 700;
+    fill: var(--neon-color); 
+    text-shadow: 0 0 1px var(--neon-color); /* Very subtle shadow on text */
+}
+.logo-path {
+    stroke: var(--neon-color);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 1px var(--neon-color)); 
+}
+
+/* --- Resume Button Styling --- */
+.resume-btn {
+    display: inline-flex;
     align-items: center;
-    margin-bottom: 10px;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border: 2px solid var(--neon-color);
+    color: var(--neon-color);
+    background-color: rgba(0, 255, 136, 0.05); /* Very light neon background */
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    box-shadow: var(--neon-shadow-light);
 }
-
-.job-card h3 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
-.job-dates {
-    font-style: italic;
-    color: #666;
-}
-
-.job-card ul {
-    list-style-type: square;
-    margin-left: 20px;
-}
-
-.job-card li {
-    margin-bottom: 8px;
+.resume-btn:hover {
+    background-color: rgba(0, 255, 136, 0.15); /* Stronger neon background on hover */
+    box-shadow: var(--neon-shadow-medium);
+    transform: translateY(-2px);
+    color: var(--text-color); /* Text goes white on hover */
 }
 
 
-/* --- Education Section --- */
-.education-item {
-    background-color: var(--card-bg);
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    transition: background-color 0.3s;
-}
-
-.degree {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: var(--accent-color);
-}
-
-.institution {
-    font-style: italic;
-    margin-top: 5px;
-}
-
-.edu-year {
-    display: block;
-    margin-top: 5px;
-    font-size: 0.9em;
-    color: #666;
-}
-
-
-/* --- Footer --- */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--dark-secondary);
-    color: var(--dark-text);
-    font-size: 0.9em;
-    position: relative; /* For scroll-to-top button */
-    transition: background-color 0.3s, color 0.3s;
-}
-
-footer p {
-    margin: 5px 0;
-}
-
-
-/* --- Interactive Buttons (Scroll-to-Top and Theme Toggle) --- */
-#scroll-to-top, #theme-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 1.2em;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    display: none; /* Controlled by JS */
-    transition: background-color 0.3s, transform 0.2s;
-    z-index: 1001;
-}
-
-#theme-toggle {
-    right: 80px;
-    background-color: var(--card-bg);
-    color: var(--main-text);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    display: block; /* Always visible */
-}
-
-#scroll-to-top:hover, #theme-toggle:hover {
-    transform: scale(1.1);
-}
-
-
-/* --- Dark Mode Styles (Applied via JS class) --- */
-body.dark-mode {
-    --main-bg: var(--dark-bg);
-    --main-text: var(--dark-text);
-    --accent-color: var(--dark-accent);
-    --card-bg: var(--dark-secondary);
-}
-
-body.dark-mode .job-dates,
-body.dark-mode .edu-year,
-body.dark-mode #navbar a {
-    color: #bbb; /* Adjusting secondary text color for dark mode */
-}
-
-body.dark-mode #hero {
-    background: linear-gradient(135deg, var(--dark-accent), #29466b);
-}
-
-body.dark-mode .job-card {
-    border-left-color: var(--dark-accent);
-}
-
-body.dark-mode .skill-category li {
-    border-bottom: 1px dashed #444;
-}
-/* --- Global Styles & Reset (New Palette) --- */
-:root {
-    /* Modern Teal/Blue Palette */
-    --light-bg: #ffffff;
-    --light-text: #2c3e50; /* Dark Charcoal Blue */
-    --light-accent: #1abc9c; /* Bright Teal */
-    --light-secondary: #ecf0f1; /* Light Gray/Silver for cards */
-    --light-shadow: rgba(44, 62, 80, 0.15); 
-
-    --dark-bg: #2c3e50; /* Dark Charcoal Blue */
-    --dark-text: #ecf0f1;
-    --dark-accent: #48c9b0; /* Lighter Teal */
-    --dark-secondary: #34495e; /* Medium Dark Blue */
-    --dark-shadow: rgba(0, 0, 0, 0.5);
-
-    --main-bg: var(--light-bg);
-    --main-text: var(--light-text);
-    --accent-color: var(--light-accent);
-    --card-bg: var(--light-secondary);
-    --box-shadow: 0 4px 12px var(--light-shadow);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Add transition for all properties for smooth color changes */
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background-color: var(--main-bg);
-    color: var(--main-text);
-}
-
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 0; /* Increased padding */
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.5em; /* Bigger heading */
-    color: var(--accent-color);
-    position: relative;
-}
-
-h2::after { /* Stylish underline effect */
-    content: '';
-    display: block;
-    width: 60px;
-    height: 3px;
-    background-color: var(--accent-color);
-    margin: 10px auto 0;
-}
-
-hr {
-    display: none; /* Removed the old HR style */
-}
-
-
-/* --- Header & Hero Section --- */
-#hero {
-    /* Sophisticated gradient */
-    background: linear-gradient(135deg, #1abc9c, #3498db); 
-    color: white;
-    padding: 100px 20px 80px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.profile-img {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    border: 6px solid white;
-    box-shadow: 0 0 0 4px rgba(255,255,255,0.5);
-    object-fit: cover;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease-in-out;
-}
-
-#hero h1 {
-    font-size: 3.5em;
-    margin-bottom: 5px;
-}
-
-/* --- Navigation Bar (Stylish Menubar) --- */
-#navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: var(--main-bg); 
-    padding: 0;
-    text-align: center;
-    box-shadow: 0 2px 10px var(--light-shadow); /* Subtle shadow */
-    transition: all 0.3s;
-}
-
-#navbar a {
-    color: var(--main-text);
-    padding: 15px 25px; /* Bigger touch area */
-    text-decoration: none;
-    font-weight: 600;
+/* --- Home Section Animations --- */
+/* Typing cursor for the actively typing line */
+#typing-text {
+    border-right: 2px solid var(--neon-color); 
+    white-space: nowrap;
+    overflow: hidden;
     display: inline-block;
-    position: relative;
+    animation: blink-caret 0.75s step-end infinite;
 }
 
-#navbar a::after { /* Stylish bottom border on hover */
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 3px;
-    bottom: 0;
-    left: 50%;
-    background-color: var(--accent-color);
-    transition: width 0.3s ease-out, left 0.3s ease-out;
+/* Static cursor for the command prompt */
+.static-cursor {
+    border-right: 2px solid var(--neon-color); 
+    animation: blink-caret 0.75s step-end infinite;
+    display: inline-block; 
+    width: 2px; 
+    height: 1.1em; 
+    vertical-align: middle;
+    margin-left: 2px;
+    visibility: hidden; 
 }
 
-#navbar a:hover::after {
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--neon-color); }
+}
+
+/* NEW: Pre-loader styles */
+#preloader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    transition: opacity 0.5s ease-out;
+    padding-top: 0; 
+}
+
+#preloader-text {
+    color: var(--neon-color);
+    text-shadow: var(--neon-shadow-medium);
+    /* Added transition for text color/shadow change */
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+#loading-bar {
     width: 100%;
-    left: 0;
+    max-width: 400px; /* Limit width of bar for aesthetics */
+    height: 4px;
+    margin-top: 1rem;
+    background-color: #333;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
-#navbar.scrolled {
-    /* Style when scrolled down */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    padding: 5px 0; /* Slightly shrink the navbar on scroll */
+#loading-progress {
+    height: 100%;
+    width: 0%;
+    background: var(--neon-color);
+    box-shadow: var(--neon-shadow-light);
+    /* Duration set to match INITIAL_LOAD_TIME (2000ms) */
+    transition: width 2s linear; 
+}
+/* End Pre-loader styles */
+
+
+/* --- Image Floating Animation (used in About Me) --- */
+@keyframes FloatingAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
-
-/* --- Skills Section --- */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+/* --- About Me Image Effects --- */
+.bw-img {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease-in-out, transform 0.4s, box-shadow 0.4s;
+    animation: FloatingAnimation 4s ease-in-out infinite; /* Keep floating */
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    /* Set a standard size for consistency, using max-width for responsiveness */
+    width: 100%; /* Full width on small screens */
+    max-width: 300px; 
+    height: auto; /* Allow height to adjust */
+    min-height: 300px; /* Minimum height for consistency */
+    object-fit: cover;
+}
+.bw-img:hover {
+    filter: grayscale(0%);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--neon-shadow-medium);
+    animation: none; /* Stop floating on hover */
 }
 
-.skill-category {
+/* --- Skills Tab Box (About Me) & Contact Tabs --- */
+.skill-tab {
     background-color: var(--card-bg);
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: var(--box-shadow);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s;
+}
+.skill-tab:hover {
+    border-color: var(--neon-color);
+    box-shadow: var(--neon-shadow-light);
+    transform: translateY(-3px);
+    color: var(--neon-color);
 }
 
-.skill-category:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px var(--light-shadow);
-}
-
-.skill-category h3 {
-    color: var(--light-text);
-    margin-bottom: 15px;
-    border-left: 5px solid var(--accent-color);
-    padding-left: 10px;
-}
-
-.skill-category ul {
-    list-style: none;
-    padding: 0;
-}
-
-.skill-category li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-    color: var(--main-text); /* Ensure text color is right */
-}
-
-/* --- Experience Section --- */
-.job-card {
+/* NEW: Contact Button Styling */
+.contact-btn {
     background-color: var(--card-bg);
-    padding: 25px;
-    margin-bottom: 30px;
-    border-left: 6px solid var(--accent-color);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px var(--light-shadow);
-}
-
-.job-dates {
-    font-style: italic;
-    color: #7f8c8d; /* Muted gray */
-}
-
-/* --- Education Section --- */
-.education-item {
-    background-color: var(--card-bg);
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    box-shadow: 0 1px 5px var(--light-shadow);
-}
-
-.degree {
-    font-weight: bold;
-    font-size: 1.3em;
-    color: var(--accent-color);
-}
-
-.edu-year {
-    color: #7f8c8d;
-}
-
-/* --- Footer --- */
-footer {
+    border: 1px solid var(--neon-color);
+    box-shadow: var(--neon-shadow-light);
+    color: var(--neon-color);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    width: 100%; /* Full width within the grid column */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 30px;
-    background-color: var(--dark-secondary);
-    color: var(--dark-text);
+    padding: 1.5rem; /* Increase padding for better touch target */
 }
 
-/* --- Interactive Buttons --- */
-#scroll-to-top, #theme-toggle {
-    /* ... (style remains similar) ... */
-    background-color: var(--accent-color);
-    color: white;
-}
-
-#theme-toggle {
-    background-color: var(--card-bg);
-    color: var(--main-text);
-    border: 1px solid #ddd;
-}
-
-
-/* --- Dark Mode Styles (Applied via JS class) --- */
-body.dark-mode {
-    --main-bg: var(--dark-bg);
-    --main-text: var(--dark-text);
-    --accent-color: var(--dark-accent);
-    --card-bg: var(--dark-secondary);
-    --box-shadow: 0 4px 12px var(--dark-shadow);
-}
-
-body.dark-mode .job-dates,
-body.dark-mode .edu-year {
-    color: #b3cddf; /* Adjusted secondary text color for dark mode */
-}
-
-body.dark-mode .skill-category h3 {
-    color: var(--dark-text);
-}
-
-body.dark-mode #navbar {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-
-body.dark-mode #navbar a:hover {
-    color: var(--dark-accent); /* Keep text readable */
-}
-
-body.dark-mode .skill-category li {
-    border-bottom: 1px solid #444;
-}
-
-body.dark-mode .education-item {
-    border: 1px solid #444;
+.contact-btn:hover {
+    background-color: rgba(0, 255, 136, 0.1); /* Light green tint on hover */
+    box-shadow: var(--neon-shadow-medium);
+    transform: translateY(-2px);
+    color: var(--text-color); /* Text color shifts slightly on hover */
 }
