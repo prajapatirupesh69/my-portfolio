@@ -11,8 +11,348 @@
     <!-- Load Robotic/Gaming/Code Font: Orbitron -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- Link to external CSS file -->
-    <link rel="stylesheet" href="style.css"> 
+    <!-- --- Consolidated CSS Styles (from style.css) --- -->
+    <style>
+        /* --- Global CSS Variables (Green Neon Theme) --- */
+        :root {
+            --bg-color: #111111;        /* Light Black / Dark Gray */
+            --text-color: #FAFAFA;     /* Primary Text Color (White) */
+            --neon-color: #00ff88;     /* Bright Green/Matrix Neon */
+            
+            /* UPDATED: Reduced intensity shadows */
+            --neon-shadow-light: 0 0 2px var(--neon-color), 0 0 3px var(--neon-color);
+            --neon-shadow-medium: 0 0 3px var(--neon-color), 0 0 6px var(--neon-color);
+            --neon-shadow-strong: 0 0 4px var(--neon-color), 0 0 8px var(--neon-color), 0 0 12px var(--neon-color);
+            
+            --card-bg: #1e1e1e;
+            --navbar-height: 72px; /* Define the navbar height for easy reference */
+        }
+
+        body {
+            /* CHANGED FONT: Using Orbitron for a futuristic, display feel */
+            font-family: 'Orbitron', sans-serif; 
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Adjust font size for better readability with the Orbitron font */
+        .section-container {
+            font-size: 1rem; /* Base size */
+            max-width: 1200px;
+            margin: 0 auto;
+            /* Adjusted padding for better mobile spacing */
+            padding: 40px 16px; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Specific height adjustment for Home section to ensure it always fills the viewport */
+        #home.section-container {
+            min-height: 100vh; /* Use full viewport height */
+            padding-top: 0; /* Ensures the section starts at the top of the viewport */
+        }
+
+        /* Apply larger padding for desktop/tablet */
+        @media (min-width: 768px) {
+            .section-container {
+                padding: 80px 20px; 
+            }
+        }
+
+        /* Font size adjustments for Orbitron and responsiveness */
+        .text-4xl { font-size: 2.5rem; }
+        .text-6xl { font-size: 4rem; }
+        .text-3xl { font-size: 2rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-sm { font-size: 0.875rem; }
+
+        /* Responsive Overrides (For better scaling of large fonts) */
+        @media (max-width: 767px) {
+            .text-4xl { font-size: 2rem; } /* Section titles */
+            .md\:text-6xl { font-size: 3rem; } /* Home title */
+            .md\:text-4xl { font-size: 2.5rem; } /* Home title on smaller devices */
+            .md\:text-xl { font-size: 1.125rem; } /* Home content */
+        }
+
+        /* Use a standard monospace font for code-like sections for clarity */
+        .font-mono {
+            font-family: 'monospace';
+        }
+
+
+        /* --- Global Neon Styles --- */
+        .neon-text-shadow {
+            /* Neon Green Text */
+            color: var(--neon-color); 
+            text-shadow: var(--neon-shadow-light);
+        }
+        .neon-text-shadow-white {
+            /* White Text with Neon Shadow (Green) */
+            color: var(--text-color); 
+            text-shadow: var(--neon-shadow-light);
+        }
+
+        .neon-box-shadow {
+            box-shadow: var(--neon-shadow-medium);
+        }
+
+        /* --- Horizontal Rule (HR) Styling --- */
+        .neon-divider {
+            border: 0;
+            height: 1px;
+            background: var(--neon-color);
+            box-shadow: var(--neon-shadow-light);
+            margin: 0 auto;
+            width: 90%; 
+            max-width: 1200px;
+        }
+
+
+        /* --- Navbar Styling --- */
+        .navbar {
+            height: var(--navbar-height); /* Explicit height for JS calculation */
+            background-color: rgba(17, 17, 17, 0.95); /* Semi-transparent dark bg */
+            border-bottom: 1px solid var(--neon-color);
+            box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3); /* Updated shadow color */
+            z-index: 1000;
+        }
+
+        /* Responsive Nav Menu (Hide on small screens, show menu icon) */
+        .menu {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .menu {
+                display: flex;
+            }
+        }
+
+        /* Added mobile menu icon */
+        .mobile-menu-toggle {
+            display: block;
+        }
+        @media (min-width: 1024px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Mobile Menu Overlay for when active */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: var(--navbar-height);
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(17, 17, 17, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 2rem;
+            display: none; /* Controlled by JS */
+            overflow-y: auto;
+        }
+        .mobile-menu-overlay a {
+            padding: 1rem 0;
+            font-size: 1.5rem;
+            width: 80%;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .mobile-menu-overlay a:last-child {
+            border-bottom: none;
+        }
+
+
+        .nav-link {
+            color: var(--text-color);
+            padding: 8px 15px;
+            text-shadow: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--neon-color);
+            text-shadow: var(--neon-shadow-light);
+        }
+
+        /* Logo specific styling */
+        .logo-svg {
+            color: var(--neon-color);
+            filter: drop-shadow(0 0 2px var(--neon-color));
+            transition: filter 0.3s ease;
+        }
+        .logo-svg:hover {
+            filter: drop-shadow(0 0 6px var(--neon-color)) drop-shadow(0 0 8px var(--neon-color));
+        }
+
+        /* SVG specific styles to use the Orbitron font and neon color */
+        .logo-text { 
+            font-family: 'Orbitron', sans-serif; 
+            font-weight: 700;
+            fill: var(--neon-color); 
+            text-shadow: 0 0 1px var(--neon-color); /* Very subtle shadow on text */
+        }
+        .logo-path {
+            stroke: var(--neon-color);
+            stroke-width: 3;
+            filter: drop-shadow(0 0 1px var(--neon-color)); 
+        }
+
+        /* --- Resume Button Styling --- */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 700;
+            border: 2px solid var(--neon-color);
+            color: var(--neon-color);
+            background-color: rgba(0, 255, 136, 0.05); /* Very light neon background */
+            transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+            box-shadow: var(--neon-shadow-light);
+        }
+        .resume-btn:hover {
+            background-color: rgba(0, 255, 136, 0.15); /* Stronger neon background on hover */
+            box-shadow: var(--neon-shadow-medium);
+            transform: translateY(-2px);
+            color: var(--text-color); /* Text goes white on hover */
+        }
+
+
+        /* --- Home Section Animations --- */
+        /* Typing cursor for the actively typing line */
+        #typing-text {
+            border-right: 2px solid var(--neon-color); 
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        /* Static cursor for the command prompt */
+        .static-cursor {
+            border-right: 2px solid var(--neon-color); 
+            animation: blink-caret 0.75s step-end infinite;
+            display: inline-block; 
+            width: 2px; 
+            height: 1.1em; 
+            vertical-align: middle;
+            margin-left: 2px;
+            visibility: hidden; 
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--neon-color); }
+        }
+
+        /* NEW: Pre-loader styles */
+        #preloader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: opacity 0.5s ease-out;
+            padding-top: 0; 
+        }
+
+        #preloader-text {
+            color: var(--neon-color);
+            text-shadow: var(--neon-shadow-medium);
+            /* Added transition for text color/shadow change */
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        #loading-bar {
+            width: 100%;
+            max-width: 400px; /* Limit width of bar for aesthetics */
+            height: 4px;
+            margin-top: 1rem;
+            background-color: #333;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #loading-progress {
+            height: 100%;
+            width: 0%;
+            background: var(--neon-color);
+            box-shadow: var(--neon-shadow-light);
+            /* Duration set to match INITIAL_LOAD_TIME (2000ms) */
+            transition: width 2s linear; 
+        }
+        /* End Pre-loader styles */
+
+
+        /* --- Image Floating Animation (used in About Me) --- */
+        @keyframes FloatingAnimation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- About Me Image Effects --- */
+        .bw-img {
+            filter: grayscale(100%);
+            transition: filter 0.5s ease-in-out, transform 0.4s, box-shadow 0.4s;
+            animation: FloatingAnimation 4s ease-in-out infinite; /* Keep floating */
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            /* Set a standard size for consistency, using max-width for responsiveness */
+            width: 100%; /* Full width on small screens */
+            max-width: 300px; 
+            height: auto; /* Allow height to adjust */
+            min-height: 300px; /* Minimum height for consistency */
+            object-fit: cover;
+        }
+        .bw-img:hover {
+            filter: grayscale(0%);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--neon-shadow-medium);
+            animation: none; /* Stop floating on hover */
+        }
+
+        /* --- Skills Tab Box (About Me) & Contact Tabs --- */
+        .skill-tab {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s;
+        }
+        .skill-tab:hover {
+            border-color: var(--neon-color);
+            box-shadow: var(--neon-shadow-light);
+            transform: translateY(-3px);
+            color: var(--neon-color);
+        }
+
+        /* NEW: Contact Button Styling */
+        .contact-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--neon-color);
+            box-shadow: var(--neon-shadow-light);
+            color: var(--neon-color);
+            transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+            width: 100%; /* Full width within the grid column */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem; /* Increase padding for better touch target */
+        }
+
+        .contact-btn:hover {
+            background-color: rgba(0, 255, 136, 0.1); /* Light green tint on hover */
+            box-shadow: var(--neon-shadow-medium);
+            transform: translateY(-2px);
+            color: var(--text-color); /* Text color shifts slightly on hover */
+        }
+    </style>
 </head>
 <body>
 
@@ -345,7 +685,208 @@
         <p>&copy; 2025 Rupesh Prajapati. Built with Neon & Code.</p>
     </footer>
 
-    <!-- Link to external JavaScript file -->
-    <script src="script.js"></script>
+    <!-- --- Consolidated JavaScript (from script.js) --- -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- CONSTANTS AND ELEMENTS ---
+            const navbarElement = document.querySelector('.navbar');
+            const preloaderContainer = document.getElementById('preloader-container');
+            const loadingProgress = document.getElementById('loading-progress');
+            const preloaderText = document.getElementById('preloader-text');
+            const homeBox = document.getElementById('home-box');
+            const navBar = document.querySelector('.navbar');
+            // Select all sections (except home), the dividers, and the footer for delayed appearance
+            const allSections = document.querySelectorAll('section:not(#home), hr.neon-divider, footer'); 
+            const typingText = document.getElementById('typing-text');
+            const staticCursor = document.getElementById('static-cursor');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+            // Sentences for the typewriter effect
+            const sentences = [
+                "ACCESSING: Rupesh Prajapati Portfolio V2.0...",
+                "INITIATING: WordPress & Shopify Customization Engine.",
+                "LOCATING: Front-End Development Toolkit...",
+                "STATUS: Delivering responsive, secure web solutions.",
+                "INPUT: Welcome. Type 'help' for navigation."
+            ];
+            let sentenceIndex = 0;
+            
+            // Time constants for preloader
+            const INITIAL_LOAD_TIME = 2000; // 2 seconds for initialization progress
+            const CONFIRMATION_TIME = 1000; // 1 second for "ACCESS GRANTED"
+
+
+            // --- Helper Function to get CSS Variable (More robust) ---
+            function getCssVariable(variableName, defaultValue = 72) {
+                try {
+                    const value = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+                    const numericValue = parseInt(value.replace('px', ''));
+                    // Return numeric value if valid, otherwise the default
+                    return isNaN(numericValue) ? defaultValue : numericValue;
+                } catch (e) {
+                    console.error(`Error reading CSS variable ${variableName}:`, e);
+                    return defaultValue;
+                }
+            }
+
+
+            // --- Mobile Menu Toggle Logic ---
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    // Toggle visibility of the menu overlay
+                    const isVisible = mobileMenuOverlay.style.display === 'flex';
+                    mobileMenuOverlay.style.display = isVisible ? 'none' : 'flex';
+                    // Optional: Change icon (bars <-> times)
+                    mobileMenuToggle.querySelector('i').className = isVisible ? 'fas fa-bars text-xl' : 'fas fa-times text-xl';
+                    
+                    // Stop body scrolling when menu is open
+                    document.body.style.overflow = isVisible ? '' : 'hidden';
+                });
+
+                // Close mobile menu when a link is clicked
+                mobileMenuOverlay.querySelectorAll('.scroll-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenuOverlay.style.display = 'none';
+                        mobileMenuToggle.querySelector('i').className = 'fas fa-bars text-xl';
+                        document.body.style.overflow = ''; // Restore body scrolling
+                    });
+                });
+            }
+
+
+            // --- Two-Stage Preloader Logic ---
+            function hidePreloaderAndShowContent() {
+                // Read the NAVBAR_HEIGHT here, ensuring CSS has had time to load
+                const NAVBAR_HEIGHT = getCssVariable('--navbar-height');
+                
+                console.log(`[Script] Navbar Height determined as: ${NAVBAR_HEIGHT}px`);
+
+                // 1. Start progress bar animation (CSS transition handles 2s duration)
+                loadingProgress.style.width = '100%';
+
+                // Wait for the initial 2-second load time
+                setTimeout(() => {
+                    // 2. Change preloader text to confirmation message
+                    preloaderText.textContent = "ACCESS GRANTED.";
+                    // OPTIONAL: Make it flash for emphasis (by changing color/shadow)
+                    preloaderText.style.color = '#ff0044'; // Use a temporary neon color
+                    preloaderText.style.textShadow = '0 0 5px #ff0044, 0 0 10px #ff0044';
+
+                    // 3. Keep confirmation message visible for 1 second (CONFIRMATION_TIME)
+                    setTimeout(() => {
+                        // Restore the original neon color before hiding
+                        preloaderText.style.color = 'var(--neon-color)';
+                        preloaderText.style.textShadow = 'var(--neon-shadow-medium)';
+                        
+                        // 4. Hide Preloader
+                        preloaderContainer.style.opacity = '0';
+                        preloaderContainer.style.pointerEvents = 'none';
+
+                        // 5. Position and Show Main Home Content
+                        // Calculate new 'top' position to visually center the box in the space BELOW the navbar.
+                        // This is the line that might have caused issues if NAVBAR_HEIGHT was null/0.
+                        homeBox.style.top = `calc(50% + (${NAVBAR_HEIGHT / 2}px))`;
+                        
+                        // Show the box, keeping the absolute centering classes
+                        homeBox.classList.remove('opacity-0', 'pointer-events-none');
+                        homeBox.classList.add('neon-box-shadow'); // Apply final style
+                        
+                        // 6. Show Navbar and subsequent sections
+                        navBar.classList.remove('opacity-0', 'pointer-events-none');
+                        navBar.classList.add('opacity-100');
+
+                        // Show all other sections, dividers, and footer
+                        allSections.forEach(el => {
+                            el.classList.remove('opacity-0', 'pointer-events-none');
+                            el.classList.add('opacity-100');
+                        });
+
+
+                        // 7. Start typing effect after the main box transition finishes
+                        setTimeout(() => {
+                            const homeContent = document.getElementById('home-content');
+                            homeContent.classList.remove('opacity-0');
+                            startTypingLoop();
+                            if (staticCursor) staticCursor.style.visibility = 'visible';
+                        }, 500); // Give a brief moment for the home-box to settle
+
+                    }, CONFIRMATION_TIME); // Wait 1 second after initialization completes
+
+                }, INITIAL_LOAD_TIME); // Wait 2 seconds for initialization
+            }
+
+            // Start the entire sequence
+            hidePreloaderAndShowContent();
+            // --- END Preloader Logic ---
+
+
+            // --- Smooth Scrolling Logic ---
+            // Moved inside a brief delay to ensure NAVBAR_HEIGHT is correctly calculated if needed
+            setTimeout(() => {
+                const NAVBAR_HEIGHT = getCssVariable('--navbar-height');
+                
+                document.querySelectorAll('.scroll-link').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        const targetId = this.getAttribute('href');
+                        if (!targetId || targetId === '#') return;
+
+                        const targetElement = document.querySelector(targetId);
+
+                        if (targetElement) {
+                            // Offset position calculation must now ONLY subtract the fixed navbar height
+                            const targetPosition = targetElement.offsetTop - NAVBAR_HEIGHT;
+
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+            }, 50); // Small delay
+
+
+            // --- Typewriter Logic ---
+            async function typeSentence(sentence, eleRef, delay = 50) {
+                const letters = sentence.split("");
+                let i = 0;
+                while(i < letters.length) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    eleRef.innerHTML += letters[i];
+                    i++;
+                }
+            }
+
+            // Continuous loop
+            async function startTypingLoop() {
+                const currentSentence = sentences[sentenceIndex];
+                typingText.innerHTML = "";
+                await typeSentence(currentSentence, typingText, 50);
+
+                // Wait 2 seconds, then delete and move to the next sentence
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                await deleteSentence(typingText, 25);
+                
+                sentenceIndex = (sentenceIndex + 1) % sentences.length;
+                startTypingLoop(); // Loop
+            }
+
+            // Deletion function
+            async function deleteSentence(eleRef, delay = 50) {
+                const text = eleRef.innerHTML;
+                const letters = text.split("");
+                while(letters.length > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    letters.pop();
+                    eleRef.innerHTML = letters.join("");
+                }
+            }
+        });
+    </script>
 </body>
 </html>
